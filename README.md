@@ -9,12 +9,12 @@ Here you will find the code that was used to make the mobile version of the Targ
     ```php
 require_once("StatSig.php");
 ```
-4. Use the Targex namespace, like so:
+4. Use the Targex namespace:
 
     ```php
-use Targex\Stats\StatSig;
+use Targex\StickArena\StatSig;
 ```
-5. Initialize an instance of the StatSig class, like so:
+5. Initialize an instance of the StatSig class:
 
     ```php
 $player = new StatSig($_POST['username']);

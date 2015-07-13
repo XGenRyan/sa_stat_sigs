@@ -1,7 +1,7 @@
 <?php
 require_once("StatSig.php");
 
-use Targex\Stats\StatSig;
+use Targex\StickArena\StatSig;
 
 $player = new StatSig("ryan");
 

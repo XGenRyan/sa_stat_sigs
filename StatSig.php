@@ -1,5 +1,5 @@
 <?php
-namespace Targex\Stats;
+namespace Targex\StickArena;
 
 class StatSig
 {

@@ -1,7 +1,7 @@
 <?php
 require_once("StatSig.php");
 
-use Targex\Stats\StatSig;
+use Targex\StickArena\StatSig;
 
 $player = new StatSig($argv[1]);
 echo $player->get_username()."\n";
