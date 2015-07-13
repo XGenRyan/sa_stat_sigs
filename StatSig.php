@@ -12,39 +12,39 @@ class StatSig
   }
 
   public function get_username() {
-    return $this->stats->user['username'];
+    return (string)$this->stats->user['username'];
   }
 
   public function get_permissions() {
-    return intval($this->stats->user['perms']);
+    return (int)$this->stats->user['perms'];
   }
 
   public function get_wins() {
-    return intval($this->stats->user->stat[0]);
+    return (int)$this->stats->user->stat[0];
   }
 
   public function get_losses() {
-    return intval($this->stats->user->stat[1]);
+    return (int)$this->stats->user->stat[1];
   }
 
   public function get_kills() {
-    return intval($this->stats->user->stat[2]);
+    return (int)$this->stats->user->stat[2];
   }
 
   public function get_deaths() {
-    return intval($this->stats->user->stat[3]);
+    return (int)$this->stats->user->stat[3];
   }
 
   public function get_total_rounds() {
-    return intval($this->stats->user->stat[4]);
+    return (int)$this->stats->user->stat[4];
   }
 
   public function is_banned() {
-    return intval($this->get_permissions()) == -1 ? 1 : 0;
+    return (int)$this->get_permissions() == -1 ? 1 : 0;
   }
 
   public function is_a_moderator() {
-    return intval($this->get_permissions()) > 0 ? 1 : 0;
+    return (int)$this->get_permissions() > 0 ? 1 : 0;
   }
 
   public function is_a_league_champion() {
@@ -52,7 +52,7 @@ class StatSig
   }
 
   public function has_a_labpass() {
-    return intval($this->stats->user->stat[5]);
+    return (int)$this->stats->user->stat[5];
   }
 
   public function has_a_builder() {
@@ -86,7 +86,7 @@ class StatSig
   }
 
   public function calculate_round_completion() {
-    return intval(($this->calculate_rounds_completed()/$this->get_total_rounds())*100);
+    return (int)($this->calculate_rounds_completed()/$this->get_total_rounds())*100;
   }
 
   public function evaluate_rank() {
@@ -128,35 +128,35 @@ class StatSig
     $kd = $this->calculate_kill_death_ratio();
     $k = $this->get_kills();
     $r = $this->evaluate_rank();
-    if ($kd >= 0 && $kd < 0.15) {
+    if ($kd >= 0.0 && $kd < 0.15) {
       return "D";
     } else if ($kd >= 0.15 && $kd < 0.3) {
       return "D+";
     } else if ($kd >= 0.3 && $kd < 0.4) {
       return "C-";
-    } else if ($kd >= .4 && $kd < 0.55) {
+    } else if ($kd >= 0.4 && $kd < 0.55) {
       return "C";
     } else if ($kd >= 0.55 && $kd < 0.7) {
       return "C+";
     } else if ($kd >= 0.7 && $kd < 0.85) {
       return "B-";
-    } else if ($kd >= 0.85 && $kd < 1) {
+    } else if ($kd >= 0.85 && $kd < 1.0) {
       return "B";
-    } else if ($kd >= 1 && $kd < 1.3) {
+    } else if ($kd >= 1.0 && $kd < 1.3) {
       return "B+";
     } else if ($kd >= 1.3  && $kd < 1.7) {
       return "A-";
-    } else if ($kd >= 1.7 && $kd < 2) {
+    } else if ($kd >= 1.7 && $kd < 2.0) {
       return "A";
-    } else if ($kd >= 2 && $kd < 3 && $k >= 5000) {
+    } else if ($kd >= 2.0 && $kd < 3.0 && $k >= 5000) {
       return "A+";
-    } else if ($kd >= 2 && $r >= 0 && $k < 5000) {
+    } else if ($kd >= 2.0 && $r >= 0.0 && $k < 5000) {
       return "A+";
-    } else if ($kd >= 3 && $kd < 5 && $k >= 5000) {
+    } else if ($kd >= 3.0 && $kd < 5.0 && $k >= 5000) {
       return "A++";
-    } else if ($kd >= 5 && $k == 5000) {
+    } else if ($kd >= 5.0 && $k == 5000) {
       return "A++";
-    } else if ($kd >= 5 && $k >= 10000) {
+    } else if ($kd >= 5.0 && $k >= 10000) {
       return "A+++";
     }
   }
