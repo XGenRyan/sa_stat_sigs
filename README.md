@@ -8,23 +8,23 @@ Here you will find the code that was used to make the mobile version of the Targ
 
     ```php
 require_once("StatSig.php");
-\```
+```
 4. Use the Targex namespace, like so:
 
     ```php
 use Targex\Stats\StatSig;
-\```
+```
 5. Initialize an instance of the StatSig class, like so:
 
     ```php
 $player = new StatSig($_POST['username']);
-\```
+```
   * Note: $player and $_POST['username'] can be renamed to whatever you want; however, if you're making a stat sig site I recommend keeping them as they are.
 6. From here it's rather intuitive, you just use it like this:
 
     ```php
 echo $player->get_kills();
-\```
+```
 7. Save index.php
 
 # Quick Reference
