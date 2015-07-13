@@ -52,4 +52,4 @@ Here are all of the method names in the StatSig class along with their data type
 * evaluate_rating (*string*)
 
 # Additional
-If you still don't quite get it, take a look at example.php.
+If you still don't quite get it, take a look at example.php
