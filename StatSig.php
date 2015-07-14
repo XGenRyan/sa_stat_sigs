@@ -86,7 +86,7 @@ class StatSig
   }
 
   public function calculate_round_completion() {
-    return (int)($this->calculate_rounds_completed()/$this->get_total_rounds())*100;
+    return (int)(($this->calculate_rounds_completed()/$this->get_total_rounds())*100);
   }
 
   public function evaluate_rank() {
