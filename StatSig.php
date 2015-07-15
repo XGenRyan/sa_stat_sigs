@@ -3,44 +3,47 @@ namespace Targex\StickArena;
 
 class StatSig
 {
+  protected $stats;
+  protected $league_champions;
+  protected $users_with_builders;
+
   public function __construct($username) {
-    $this->username = $username;
-    $api = simplexml_load_file('http://api.xgenstudios.com/?method=xgen.stickarena.stats.get&username='.$this->username);
-    $this->stats = $api[0]->stats->game;
-    $this->users_with_builders = ["codyshadow", "chicken", ".,syco,.", "y3lloman", "bloodsyn", "dan", "stickslayer132", "77gamer77", ".,criticalx,.", "dmaster12", "springbranch", ".get.money.", "shadowcasterx4ffc", "yiff.", "mapymaper.", "jakethesnake", "masterchuf", "air,", "delocuro", "cr1t1c1sm", "sk8indude", "ghostrec0n", "bridgeofstraw", "action", "jaguar", "ghecko", "cadaver999", ".,chickenator,.", "shot", "jzuo", "believed", "felumade.", "stabulator", "vegeta,rock", "firegun000", "bullet.girl.", "gore4life", ",.smokez.,", "718", "joeseph", "volt", "coldhot", "5k1", "crocodile", "difficult", "deadmafia", "hanktankerous", "wolfy", "shot..to..kill..."];
-    $this->league_champions = ["ava", "mayne", "koolaid"];
+    $api = simplexml_load_file('http://api.xgenstudios.com/?method=xgen.stickarena.stats.get&username='.$username);
+    $this->stats = $api[0]->stats->game->user;
+    $this->league_champions = ["ava", "jesus", "koolaid", "mayne"];
+    $this->users_with_builders = [",.smokez.,",".,chickenator,.",".,criticalx,.",".,syco,.",".get.money.","5k1","718","77gamer77","action","air,","believed","bloodsyn","bridgeofstraw","bullet.girl.","cadaver999","chicken","codyshadow","coldhot","cr1t1c1sm","crocodile","dan","deadmafia","delocuro","difficult","dmaster12","felumade.","firegun000","ghecko","ghostrec0n","gore4life","hanktankerous","jaguar","jakethesnake","joeseph","jzuo","mapymaper.","masterchuf","shadowcasterx4ffc","shot","shot..to..kill...","sk8indude","springbranch","stabulator","stickslayer132","vegeta,rock","volt","wolfy","y3lloman","yiff."];
   }
 
   public function get_username() {
-    return (string)$this->stats->user['username'];
+    return (string)$this->stats['username'];
   }
 
   public function get_permissions() {
-    return (int)$this->stats->user['perms'];
+    return (int)$this->stats['perms'];
   }
 
   public function get_wins() {
-    return (int)$this->stats->user->stat[0];
+    return (int)$this->stats->stat[0];
   }
 
   public function get_losses() {
-    return (int)$this->stats->user->stat[1];
+    return (int)$this->stats->stat[1];
   }
 
   public function get_kills() {
-    return (int)$this->stats->user->stat[2];
+    return (int)$this->stats->stat[2];
   }
 
   public function get_deaths() {
-    return (int)$this->stats->user->stat[3];
+    return (int)$this->stats->stat[3];
   }
 
   public function get_total_rounds() {
-    return (int)$this->stats->user->stat[4];
+    return (int)$this->stats->stat[4];
   }
 
   public function is_banned() {
-    return (int)$this->get_permissions() == -1 ? 1 : 0;
+    return (int)$this->get_permissions() === -1 ? 1 : 0;
   }
 
   public function is_a_moderator() {
@@ -51,21 +54,21 @@ class StatSig
     return in_array(strtolower($this->get_username()), $this->league_champions) ? 1 : 0;
   }
 
-  public function has_a_labpass() {
-    return (int)$this->stats->user->stat[5];
-  }
-
   public function has_a_builder() {
     return in_array(strtolower($this->get_username()), $this->users_with_builders) ? 1 : 0;
   }
 
+  public function has_a_labpass() {
+    return (int)$this->stats->stat[5];
+  }
+
   public function calculate_kill_death_ratio() {
-    if ($this->get_deaths() == 0) return $this->get_kills();
+    if ($this->get_deaths() === 0) return (double)$this->get_kills();
     return floor(($this->get_kills()/$this->get_deaths())*100)/100;
   }
 
   public function calculate_win_loss_ratio() {
-    if ($this->get_losses() == 0) return $this->get_wins();
+    if ($this->get_losses() === 0) return (double)$this->get_wins();
     return floor(($this->get_wins()/$this->get_losses())*100)/100;
   }
 
@@ -154,7 +157,7 @@ class StatSig
       return "A+";
     } else if ($kd >= 3.0 && $kd < 5.0 && $k >= 5000) {
       return "A++";
-    } else if ($kd >= 5.0 && $k == 5000) {
+    } else if ($kd >= 5.0 && $k === 5000) {
       return "A++";
     } else if ($kd >= 5.0 && $k >= 10000) {
       return "A+++";
