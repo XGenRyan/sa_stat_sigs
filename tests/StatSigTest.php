@@ -3,7 +3,7 @@ require_once("./StatSig.php");
 
 use Targex\StickArena\StatSig;
 
-class StatSigTest extends \Exception
+class StatSigTest extends \PHPUnit_Framework_TestCase
 {
   private $ava;
   private $bloodsyn;
@@ -11,19 +11,12 @@ class StatSigTest extends \Exception
   private $test1;
   private $test2;
 
-  public $get_number_of_assertions = 0;
-
   public function __construct() {
     $this->ava = new StatSig("ava");
     $this->bloodsyn = new StatSig("bloodsyn");
     $this->skye = new StatSig("skye");
     $this->test1 = new StatSig("test.test12");
     $this->test2 = new StatSig("phpunit4.7");
-  }
-
-  private function assertSame($arg1, $arg2) {
-    $this->get_number_of_assertions++;
-    if ($arg1 !== $arg2) throw new Exception(debug_backtrace()[1]['function']."(): expected ".$arg1." (".gettype($arg1).") but got ".$arg2." (".gettype($arg2).")\n");
   }
 
   public function test_get_username() {
