@@ -1,5 +1,6 @@
 <?php
 namespace Targex\StickArena;
+use \SimpleXMLElement;
 
 class StatSig
 {
@@ -8,8 +9,13 @@ class StatSig
   protected $users_with_builders;
 
   public function __construct($username) {
-    $api = simplexml_load_file('http://api.xgenstudios.com/?method=xgen.stickarena.stats.get&username='.$username);
-    $this->stats = $api[0]->stats->game->user;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://api.xgenstudios.com/?method=xgen.stickarena.stats.get&username=".$username);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $html = curl_exec($ch);
+    curl_close($ch);
+    $xml = new \SimpleXMLElement($html);
+    $this->stats = $xml[0]->stats->game->user;
     $this->league_champions = ["ava", "jesus", "koolaid", "mayne"];
     $this->users_with_builders = [",.smokez.,",".,chickenator,.",".,criticalx,.",".,syco,.",".get.money.","5k1","718","77gamer77","action","air,","believed","bloodsyn","bridgeofstraw","bullet.girl.","cadaver999","chicken","codyshadow","coldhot","cr1t1c1sm","crocodile","dan","deadmafia","delocuro","difficult","dmaster12","felumade.","firegun000","ghecko","ghostrec0n","gore4life","hanktankerous","jaguar","jakethesnake","joeseph","jzuo","mapymaper.","masterchuf","shadowcasterx4ffc","shot","shot..to..kill...","sk8indude","springbranch","stabulator","stickslayer132","vegeta,rock","volt","wolfy","y3lloman","yiff."];
   }
