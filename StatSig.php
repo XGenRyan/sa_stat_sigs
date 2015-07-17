@@ -94,7 +94,9 @@ class StatSig
 
   public function evaluate_rank() {
     $k = $this->get_kills();
-    if ($k >= 5 && $k < 25) {
+    if ($k < 5) {
+      return 0;
+    } else if ($k >= 5 && $k < 25) {
       return 1;
     } else if ($k >= 25 && $k < 100) {
       return 2;
