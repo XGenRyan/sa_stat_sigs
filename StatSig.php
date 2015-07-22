@@ -49,19 +49,19 @@ class StatSig
   }
 
   public function is_banned() {
-    return (int)$this->get_permissions() === -1 ? 1 : 0;
+    return (int)($this->get_permissions() === -1) ? 1 : 0;
   }
 
   public function is_a_moderator() {
-    return (int)$this->get_permissions() > 0 ? 1 : 0;
+    return (int)($this->get_permissions() > 0) ? 1 : 0;
   }
 
   public function is_a_league_champion() {
-    return in_array(strtolower($this->get_username()), $this->league_champions) ? 1 : 0;
+    return (int)in_array(strtolower($this->get_username()), $this->league_champions);
   }
 
   public function has_a_builder() {
-    return in_array(strtolower($this->get_username()), $this->users_with_builders) ? 1 : 0;
+    return (int)in_array(strtolower($this->get_username()), $this->users_with_builders);
   }
 
   public function has_a_labpass() {
@@ -69,13 +69,11 @@ class StatSig
   }
 
   public function calculate_kill_death_ratio() {
-    if ($this->get_deaths() === 0) return (double)$this->get_kills();
-    return floor(($this->get_kills()/$this->get_deaths())*100)/100;
+    return ($this->get_deaths() === 0) ? (double)$this->get_kills() : floor(($this->get_kills()/$this->get_deaths())*100)/100;
   }
 
   public function calculate_win_loss_ratio() {
-    if ($this->get_losses() === 0) return (double)$this->get_wins();
-    return floor(($this->get_wins()/$this->get_losses())*100)/100;
+    return ($this->get_losses() === 0) ? (double)$this->get_wins() : floor(($this->get_wins()/$this->get_losses())*100)/100;
   }
 
   public function calculate_rounds_completed() {
@@ -138,7 +136,6 @@ class StatSig
   public function evaluate_rating() {
     $kd = $this->calculate_kill_death_ratio();
     $k = $this->get_kills();
-    $r = $this->evaluate_rank();
     if ($kd >= 0.0 && $kd < 0.15) {
       return "D";
     } else if ($kd >= 0.15 && $kd < 0.3) {
@@ -159,13 +156,13 @@ class StatSig
       return "A-";
     } else if ($kd >= 1.7 && $kd < 2.0) {
       return "A";
-    } else if ($kd >= 2.0 && $kd < 3.0 && $k >= 5000) {
+    } else if ($kd >= 2.0 && $k < 5000) {
       return "A+";
-    } else if ($kd >= 2.0 && $r >= 0.0 && $k < 5000) {
+    } else if ($kd >= 2.0 && $kd < 3.0 && $k >= 5000) {
       return "A+";
     } else if ($kd >= 3.0 && $kd < 5.0 && $k >= 5000) {
       return "A++";
-    } else if ($kd >= 5.0 && $k === 5000) {
+    } else if ($kd >= 5.0 && $k >= 5000 && $k < 10000) {
       return "A++";
     } else if ($kd >= 5.0 && $k >= 10000) {
       return "A+++";
