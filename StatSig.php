@@ -17,7 +17,7 @@ class StatSig
     $xml = new \SimpleXMLElement($html);
     $this->stats = $xml[0]->stats->game->user;
     $this->league_champions = ["ava", "jesus", "koolaid", "mayne"];
-    $this->users_with_builders = [",.smokez.,",".,chickenator,.",".,criticalx,.",".,syco,.",".get.money.","5k1","718","77gamer77","action","air,","believed","bloodsyn","bridgeofstraw","bullet.girl.","cadaver999","chicken","codyshadow","coldhot","cr1t1c1sm","crocodile","dan","deadmafia","delocuro","difficult","dmaster12","felumade.","firegun000","ghecko","ghostrec0n","gore4life","hanktankerous","jaguar","jakethesnake","joeseph","jzuo","mapymaper.","masterchuf","shadowcasterx4ffc","shot","shot..to..kill...","sk8indude","springbranch","stabulator","stickslayer132","vegeta,rock","volt","wolf","y3lloman","yiff.","miu","criminal","heredur","aero","canasian","name","robyn","luis","ladybulletx"];
+    $this->users_with_builders = [",.smokez.,", ".,chickenator,.", ".,criticalx,.", ".,syco,.", ".get.money.", "5k1", "718", "77gamer77", "action", "aero", "air,", "believed", "bloodsyn", "bridgeofstraw", "bullet.girl.", "cadaver999", "canasian", "chicken", "codyshadow", "coldhot", "cr1t1c1sm", "criminal", "crocodile", "dan", "deadmafia", "delocuro", "difficult", "dmaster12", "felumade.", "firegun000", "ghecko", "ghostrec0n", "gore4life", "hanktankerous", "heredur", "jaguar", "jakethesnake", "joeseph", "jzuo", "ladybulletx", "luis", "mapymaper.", "masterchuf", "miu", "name", "shadowcasterx4ffc", "shot", "shot..to..kill...", "sk8indude", "springbranch", "stabulator", "stickslayer132", "vegeta,rock", "volt", "wolf", "y3lloman", "yiff."];
   }
 
   public function get_username() {
