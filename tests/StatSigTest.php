@@ -127,6 +127,11 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
     $this->assertSame(69, $this->test2->calculate_round_completion());
   }
 
+  public function test_calculate_estimated_mins_played() {
+    $this->assertSame(6, $this->test1->calculate_estimated_mins_played());
+    $this->assertSame(51, $this->test2->calculate_estimated_mins_played());
+  }
+
   public function test_evaluate_rank() {
     $this->assertSame(1, $this->test1->evaluate_rank());
     $this->assertSame(2, $this->test2->evaluate_rank());
