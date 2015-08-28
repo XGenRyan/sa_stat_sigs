@@ -106,6 +106,10 @@ class StatSig
     return (int)(($this->calculate_rounds_completed()/$this->get_total_rounds())*100);
   }
 
+  public function calculate_estimated_mins_played() {
+    return (int)(($this->calculate_rounds_completed()*5)+(($this->calculate_rounds_forfeited()*5)/3));
+  }
+
   public function evaluate_rank() {
     $k = $this->get_kills();
     if ($k < 5) {
