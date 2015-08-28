@@ -14,6 +14,7 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
   public function __construct() {
     $this->ava = new StatSig("ava");
     $this->bloodsyn = new StatSig("bloodsyn");
+    $this->ryan = new StatSig("ryan");
     $this->skye = new StatSig("skye");
     $this->test1 = new StatSig("test.test12");
     $this->test2 = new StatSig("phpunit4.7");
@@ -70,8 +71,19 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
     $this->assertSame(0, $this->test1->is_a_league_champion());
   }
 
+  public function test_is_a_community_builder() {
+    $this->assertSame(1, $this->ryan->is_a_community_builder());
+    $this->assertSame(0, $this->bloodsyn->is_a_community_builder());
+  }
+
+  public function test_is_a_featured_map_maker() {
+    $this->assertSame(1, $this->bloodsyn->is_a_featured_map_maker());
+    $this->assertSame(0, $this->ryan->is_a_featured_map_maker());
+  }
+
   public function test_has_a_builder() {
     $this->assertSame(1, $this->bloodsyn->has_a_builder());
+    $this->assertSame(1, $this->ryan->has_a_builder());
     $this->assertSame(0, $this->test1->has_a_builder());
   }
 

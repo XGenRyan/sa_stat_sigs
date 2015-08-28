@@ -6,7 +6,8 @@ class StatSig
 {
   protected $stats;
   protected $league_champions;
-  protected $users_with_builders;
+  protected $community_builders;
+  protected $featured_map_makers;
 
   public function __construct($username) {
     $ch = curl_init();
@@ -17,7 +18,8 @@ class StatSig
     $xml = new \SimpleXMLElement($html);
     $this->stats = $xml[0]->stats->game->user;
     $this->league_champions = ["ava", "jesus", "koolaid", "mayne"];
-    $this->users_with_builders = [",.smokez.,", ".,chickenator,.", ".,criticalx,.", ".,syco,.", ".get.money.", "5k1", "718", "77gamer77", "action", "aero", "air,", "believed", "bloodsyn", "bridgeofstraw", "bullet.girl.", "cadaver999", "canasian", "chicken", "codyshadow", "coldhot", "cr1t1c1sm", "criminal", "crocodile", "dan", "deadmafia", "delocuro", "difficult", "dmaster12", "felumade.", "firegun000", "ghecko", "ghostrec0n", "gore4life", "hanktankerous", "heredur", "jaguar", "jakethesnake", "joeseph", "jzuo", "ladybulletx", "luis", "mapymaper.", "masterchuf", "miu", "name", "shadowcasterx4ffc", "shot", "shot..to..kill...", "sk8indude", "springbranch", "stabulator", "stickslayer132", "vegeta,rock", "volt", "wolf", "y3lloman", "yiff."];
+    $this->community_builders = [".get.money.", "ace2cool", "action", "angryninny", "bardahl", "boldur", "carlos", "cl0ud", "deadmafia", "declave", "epicfailkid123", "glenn", "iwannabe", "jaguar", "joe7777777", "ketamine", "lawjax", "luis", "marty", "neo", "petter", "ryan", "schallmeister", "shadowcasterx4ffc", "shot", "sneezes", "targa", "viperimazza", "volt", "wolf", "zach"];
+    $this->featured_map_makers = [",.smokez.,", ".,chickenator,.", ".,criticalx,.", ".,syco,.", ".get.money.", "5k1", "718", "77gamer77", "action", "aero", "air,", "believed", "bloodsyn", "bridgeofstraw", "bullet.girl.", "cadaver999", "canasian", "chicken", "choas81","codyshadow", "coldhot", "cr1t1c1sm", "criminal", "crocodile", "dan", "deadmafia", "delocuro", "difficult", "dmaster12", "felumade.", "firegun000", "ghecko", "ghostrec0n", "gore4life", "hanktankerous", "heredur", "jaguar", "jakethesnake", "joeseph", "jzuo", "ladybulletx", "luis", "mapymaper.", "masterchuf", "miu", "name", "shadowcasterx4ffc", "shot", "shot..to..kill...", "sk8indude", "springbranch", "stabulator", "stickslayer132", "vegeta,rock", "volt", "wolf", "y3lloman", "yiff."];
   }
 
   public function get_username() {
@@ -60,8 +62,16 @@ class StatSig
     return (int)in_array(strtolower($this->get_username()), $this->league_champions);
   }
 
+  public function is_a_community_builder() {
+    return (int)in_array(strtolower($this->get_username()), $this->community_builders);
+  }
+
+  public function is_a_featured_map_maker() {
+    return (int)in_array(strtolower($this->get_username()), $this->featured_map_makers);
+  }
+
   public function has_a_builder() {
-    return (int)in_array(strtolower($this->get_username()), $this->users_with_builders);
+    return (int)($this->is_a_community_builder() || $this->is_a_featured_map_maker());
   }
 
   public function has_a_labpass() {
