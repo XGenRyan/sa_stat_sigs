@@ -50,6 +50,7 @@ Here are all of the method names in the StatSig class along with their data type
 * calculate_kills_per_round (*double*)
 * calculate_deaths_per_round (*double*)
 * calculate_round_completion (*int*)
+* calculate_estimated_mins_played (*int*)
 * evaluate_rank (*int*)
 * evaluate_rating (*string*)
 
