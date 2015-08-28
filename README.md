@@ -39,6 +39,8 @@ Here are all of the method names in the StatSig class along with their data type
 * is_banned (*bool*)
 * is_a_moderator (*bool*)
 * is_a_league_champion (*bool*)
+* is_a_community_builder (*bool*)
+* is_a_featured_map_maker (*bool*)
 * has_a_builder (*bool*)
 * has_a_labpass (*bool*)
 * calculate_kill_death_ratio (*double*)
