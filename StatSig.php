@@ -95,15 +95,15 @@ class StatSig
   }
 
   public function calculate_kills_per_round() {
-    return floor(($this->get_kills()/$this->calculate_rounds_completed())*100)/100;
+    return ($this->calculate_rounds_completed() === 0) ? (double)$this->calculate_rounds_completed() : floor(($this->get_kills()/$this->calculate_rounds_completed())*100)/100;
   }
 
   public function calculate_deaths_per_round() {
-    return floor(($this->get_deaths()/$this->calculate_rounds_completed())*100)/100;
+    return ($this->calculate_rounds_completed() === 0) ? (double)$this->calculate_rounds_completed() : floor(($this->get_deaths()/$this->calculate_rounds_completed())*100)/100;
   }
 
   public function calculate_round_completion() {
-    return (int)(($this->calculate_rounds_completed()/$this->get_total_rounds())*100);
+    return ($this->get_total_rounds() === 0) ? $this->get_total_rounds() : (int)(($this->calculate_rounds_completed()/$this->get_total_rounds())*100);
   }
 
   public function calculate_estimated_mins_played() {
