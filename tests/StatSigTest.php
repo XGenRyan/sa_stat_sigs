@@ -10,6 +10,7 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
   private $skye;
   private $test1;
   private $test2;
+  private $test3;
 
   public function __construct() {
     $this->ava = new StatSig("ava");
@@ -18,6 +19,7 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
     $this->skye = new StatSig("skye");
     $this->test1 = new StatSig("test.test12");
     $this->test2 = new StatSig("phpunit4.7");
+    $this->test3 = new StatSig("renault");
   }
 
   public function test_get_username() {
@@ -95,26 +97,31 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
   public function test_calculate_kill_death_ratio() {
     $this->assertSame(5.0, $this->test1->calculate_kill_death_ratio());
     $this->assertSame(1.37, $this->test2->calculate_kill_death_ratio());
+    $this->assertSame(0.0, $this->test3->calculate_kill_death_ratio());
   }
 
   public function test_calculate_win_loss_ratio() {
     $this->assertSame(1.0, $this->test1->calculate_win_loss_ratio());
     $this->assertSame(3.5, $this->test2->calculate_win_loss_ratio());
+    $this->assertSame(0.0, $this->test3->calculate_win_loss_ratio());
   }
 
   public function test_calculate_rounds_completed() {
     $this->assertSame(1, $this->test1->calculate_rounds_completed());
     $this->assertSame(9, $this->test2->calculate_rounds_completed());
+    $this->assertSame(0, $this->test3->calculate_rounds_completed());
   }
 
   public function test_calculate_rounds_forfeited() {
     $this->assertSame(1, $this->test1->calculate_rounds_forfeited());
     $this->assertSame(4, $this->test2->calculate_rounds_forfeited());
+    $this->assertSame(0, $this->test3->calculate_rounds_forfeited());
   }
 
   public function test_calculate_kills_per_round() {
     $this->assertSame(5.0, $this->test1->calculate_kills_per_round());
     $this->assertSame(11.0, $this->test2->calculate_kills_per_round());
+    $this->assertSame(0.0, $this->test3->calculate_kills_per_round());
   }
 
   public function test_calculate_deaths_per_round() {
@@ -125,11 +132,13 @@ class StatSigTest extends \PHPUnit_Framework_TestCase
   public function test_calculate_round_completion() {
     $this->assertSame(50, $this->test1->calculate_round_completion());
     $this->assertSame(69, $this->test2->calculate_round_completion());
+    $this->assertSame(0, $this->test3->calculate_round_completion());
   }
 
   public function test_calculate_estimated_mins_played() {
     $this->assertSame(6, $this->test1->calculate_estimated_mins_played());
     $this->assertSame(51, $this->test2->calculate_estimated_mins_played());
+    $this->assertSame(0, $this->test3->calculate_estimated_mins_played());
   }
 
   public function test_evaluate_rank() {
